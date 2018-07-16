@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vanilla JS piano</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+  <div class="piano">
+    <div data-key="65" class="key key-white">
+
+    </div>
+    <div data-key="83" class="key key-white">
+
+    </div>
+    <div data-key="68" class="key key-white">
+
+    </div>
+    <div data-key="70" class="key key-white">
+
+    </div>
+    <div data-key="71" class="key key-white">
+
+    </div>
+    <div data-key="72" class="key key-white">
+
+    </div>
+    <div data-key="74" class="key key-white">
+
+    </div>
+    <div data-key="75" class="key key-white">
+
+    </div>
+    <div data-key="76" class="key key-white">
+
+    </div>
+    <div data-key="186" class="key key-white">
+
+    </div>
+    <div data-key="222" class="key key-white">
+
+    </div>
+    <div data-key="220" class="key dfs">
+
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/68437-piano-a.wav"></audio>
+  <audio data-key="83" src="sounds/68438-piano-b.wav"></audio>
+  <audio data-key="68" src="sounds/68439-piano-bb.wav"></audio>
+  <audio data-key="70" src="sounds/68440-piano-c.wav"></audio>
+  <audio data-key="71" src="sounds/68441-piano-c.wav"></audio>
+  <audio data-key="72" src="sounds/68442-piano-d.wav"></audio>
+  <audio data-key="74" src="sounds/68443-piano-e.wav"></audio>
+  <audio data-key="75" src="sounds/68444-piano-eb.wav"></audio>
+  <audio data-key="76" src="sounds/68445-piano-f.wav"></audio>
+  <audio data-key="186" src="sounds/68446-piano-f.wav"></audio>
+  <audio data-key="222" src="sounds/68447-piano-g.wav"></audio>
+  <audio data-key="220" src="sounds/68448-piano-g.wav"></audio>
+asdf
+
+  <script>
+    function playSound(e) {
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play();
+      key.classList.add('playing');
+    }
+
+    function clickKey() {
+      const keyCode = this.getAttribute('data-key');
+      const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+      audio.currentTime = 0;
+      audio.play();
+      this.classList.add('playing');
+    }
+
+    function removeTransition(e) {
+      if (e.propertyName !== 'transform') return;
+      this.classList.remove('playing');
+    };
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => {
+      key.addEventListener('click', clickKey);
+      key.addEventListener('transitionend', removeTransition);
+
+    });
+
+    window.addEventListener('keydown', playSound);
+
+  </script>
+
+
+</body>
+
+</html>
