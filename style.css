@@ -31,15 +31,16 @@ body {
   box-shadow: 0px 0px 161px 109px rgba(0,0,0,0.37);
 }
 
-.piano:before {
-  position: absolute;
-  content: '';
-  top: -20px;
-  left: 0;
-  width: 100%;
-  height: 20px;
-  background-color: black;
-  z-index: 1000;
+
+
+.key {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  transition: height .1s ease;
+  border-radius: 0px 0px 5px 5px;
+  padding-top: 5px;
+  height: auto;
 }
 
 .key-white {
@@ -47,13 +48,64 @@ body {
   width: 55px;
   border: 2px solid whitesmoke;
   height: 100%;
-  transition: all .1s ease;
-  transform: scaleY(1);
+}
+
+.key-black {
+  position: absolute;
+  top: 0;
+  background-color: black;
+  border: 2px solid #383838;
+  width: 30px;
+  height: 60%;
+  z-index: 1000;
+}
+
+.key-black:before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: '';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.key-black kbd {
+  color: white;
+}
+
+.key-black-1 {
+  left: 40px;
+}
+
+.key-black-2 {
+  left: 100px;
+}
+
+.key-black-3 {
+  left: 220px;
+}
+
+.key-black-4 {
+  left: 280px;
+}
+
+.key-black-5 {
+  left: 340px;
 }
 
 .playing {
-  background-color: white;
-  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
-  transition: all .1s ease;
-  transform: scaleY(1.1);
+  transition: height .1s linear;
 }
+
+.playing.key-white {
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
+  height: 105%;
+}
+
+.playing.key-black {
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(75,78,84,1) 100%);
+  height: 63%;
+}
+
