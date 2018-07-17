@@ -2,6 +2,7 @@ const keys = document.querySelectorAll('.key');
 const recordedSounds = [];
 const recordButtonText = document.getElementById('record');
 const resetButtonText = document.getElementById('reset');
+const playButtonText = document.getElementById('play');
 const playButton = document.getElementById('btn-play');
 const resetButton = document.getElementById('btn-reset');
 var startingTime = 1000;
@@ -12,6 +13,7 @@ var toReset = false;
 playSong = () => {
   let counter = 0;
   const playIt = setInterval(() => {
+    playButtonText.classList.add('active-record');
     counter = counter + 100;
     recordedSounds.forEach(e => {
       if (e.time == counter) {
@@ -19,7 +21,9 @@ playSong = () => {
       }
     });
     if ((counter > lastTime) || (counter > 60000)) {
-      clearInterval(playIt)
+      clearInterval(playIt);
+      playButtonText.classList.remove('active-record');
+  
     }
   }, 100);
   playIt;
