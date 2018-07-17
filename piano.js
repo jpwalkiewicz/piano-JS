@@ -4,15 +4,27 @@ const recordButtonText = document.getElementById('record');
 const resetButtonText = document.getElementById('reset');
 const playButton = document.getElementById('btn-play');
 const resetButton = document.getElementById('btn-reset');
+var startingTime = 1000;
+var lastTime = 0;
 var isRecording = false;
 var toReset = false;
 
 playSong = () => {
-  recordedSounds.forEach(song => {
-    const audio = document.querySelector(`audio[data-key="${song}"]`);
-    audio.play();
-  })
+  let counter = 0;
+  const playIt = setInterval(() => {
+    counter = counter + 100;
+    recordedSounds.forEach(e => {
+      if (e.time == counter) {
+        e.audioFile.play();
+      }
+    });
+    if ((counter > lastTime) || (counter > 60000)) {
+      clearInterval(playIt)
+    }
+  }, 100);
+  playIt;
 };
+
 
 startRecording = () => {
   isRecording = true;
@@ -21,6 +33,7 @@ startRecording = () => {
   recordButtonText.classList.add('active-record');
   playButton.disabled = false;
   resetButton.disabled = false;
+  startingTime = new Date().getTime();
 };
 
 recordReset = () => {
@@ -39,14 +52,22 @@ recordReset = () => {
   });
 };
 
+keyTime = () => {
+  const localTime = new Date().getTime();
+  lastTime = localTime - startingTime;
+  return Math.ceil(lastTime / 100) * 100;
+};
+
 function playSound(e) {
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   if (!audio) return;
   if (isRecording) {
-    recordedSounds.push(e.keyCode);
+    recordedSounds.push({
+      time: keyTime(),
+      audioFile: audio
+    });
   }
-  console.log(recordedSounds);
   audio.currentTime = 0;
   audio.play();
   key.classList.add('playing');
@@ -56,7 +77,10 @@ function clickKey() {
   const keyCode = this.getAttribute('data-key');
   const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
   if (isRecording) {
-    recordedSounds.push(Number(keyCode));
+    recordedSounds.push({
+      time: keyTime(),
+      audioFile: audio
+    });
   }
   audio.currentTime = 0;
   audio.play();
