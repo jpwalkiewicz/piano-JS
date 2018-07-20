@@ -5,7 +5,8 @@ const resetButtonText = document.getElementById('reset');
 const playButtonText = document.getElementById('play');
 const playButton = document.getElementById('btn-play');
 const resetButton = document.getElementById('btn-reset');
-var startingTime = 1000;
+const minInterval = 50;
+var startingTime = 0;
 var lastTime = 0;
 var isRecording = false;
 var toReset = false;
@@ -14,18 +15,19 @@ playSong = () => {
   let counter = 0;
   const playIt = setInterval(() => {
     playButtonText.classList.add('active-record');
-    counter = counter + 100;
     recordedSounds.forEach(e => {
       if (e.time == counter) {
+        e.audioFile.currentTime = 0;
         e.audioFile.play();
       }
     });
-    if ((counter > lastTime) || (counter > 60000)) {
+    counter = counter + minInterval;
+    if ((counter > lastTime+1000) || (counter > 60000)) {
       clearInterval(playIt);
       playButtonText.classList.remove('active-record');
   
     }
-  }, 100);
+  }, minInterval);
   playIt;
 };
 
@@ -59,7 +61,7 @@ recordReset = () => {
 keyTime = () => {
   const localTime = new Date().getTime();
   lastTime = localTime - startingTime;
-  return Math.ceil(lastTime / 100) * 100;
+  return Math.ceil(lastTime / minInterval) * minInterval;
 };
 
 function playSound(e) {
