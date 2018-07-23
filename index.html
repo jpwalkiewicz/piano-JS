@@ -10,12 +10,25 @@
 <body>
 
 <div class="wrapper">
+
+  <div class="switch-panel">
+    <p>keys</p>
+    <button onclick="changeKeyText()" class="btn-switch" id="switch">
+    </button>
+    <p>gama</p>
+  </div>
   <div class="piano">
     <div data-key="65" class="key key-white">
       <kbd>a</kbd>
     </div>
+    <div data-key="87" class="key key-black key-black-1">
+      <kbd>w</kbd>
+    </div>
     <div data-key="83" class="key key-white">
       <kbd>s</kbd>
+    </div>
+    <div data-key="69" class="key key-black key-black-2">
+      <kbd>e</kbd>
     </div>
     <div data-key="68" class="key key-white">
       <kbd>d</kbd>
@@ -23,29 +36,23 @@
     <div data-key="70" class="key key-white">
       <kbd>f</kbd>
     </div>
-    <div data-key="71" class="key key-white">
-      <kbd>g</kbd>
-    </div>
-    <div data-key="72" class="key key-white">
-      <kbd>h</kbd>
-    </div>
-    <div data-key="74" class="key key-white">
-      <kbd>j</kbd>
-    </div>
-    <div data-key="87" class="key key-black key-black-1">
-      <kbd>w</kbd>
-    </div>
-    <div data-key="69" class="key key-black key-black-2">
-      <kbd>e</kbd>
-    </div>
     <div data-key="84" class="key key-black key-black-3">
       <kbd>t</kbd>
+    </div>
+    <div data-key="71" class="key key-white">
+      <kbd>g</kbd>
     </div>
     <div data-key="89" class="key key-black key-black-4">
       <kbd>y</kbd>
     </div>
+    <div data-key="72" class="key key-white">
+      <kbd>h</kbd>
+    </div>
     <div data-key="85" class="key key-black key-black-5">
       <kbd>u</kbd>
+    </div>
+    <div data-key="74" class="key key-white">
+      <kbd>j</kbd>
     </div>
 
   </div>
@@ -53,8 +60,10 @@
     <button onclick="startRecording()" class="btn-panel">
       <span id="record" class="btn-record panel-icons ">●</span>Record
     </button>
-    <button disabled id="btn-play" onclick="playSong()" class="btn-panel"><span id="play" class="panel-icons">▶</span>Play</button>
-    <button disabled id="btn-reset" onclick="recordReset()" class="btn-panel"><span class="panel-icons">◼</span><span id="reset">Stop</span>
+    <button disabled id="btn-play" onclick="playSong()" class="btn-panel"><span id="play" class="panel-icons">▶</span>Play
+    </button>
+    <button disabled id="btn-reset" onclick="recordReset()" class="btn-panel"><span class="panel-icons">◼</span><span
+            id="reset">Stop</span>
     </button>
   </div>
 </div>

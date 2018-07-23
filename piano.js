@@ -1,22 +1,46 @@
 const keys = document.querySelectorAll('.key');
+const keysText = {
+  normal: ['a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j'],
+  gama: ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'h' ]
+};
 const recordedSounds = [];
 const recordButtonText = document.getElementById('record');
 const resetButtonText = document.getElementById('reset');
 const playButtonText = document.getElementById('play');
 const playButton = document.getElementById('btn-play');
 const resetButton = document.getElementById('btn-reset');
+const switchButton = document.getElementById('switch');
 const minInterval = 50;
 var startingTime = 0;
 var lastTime = 0;
 var isRecording = false;
 var toReset = false;
+var keysTextType = 'normal';
+
+
+
+changeKeyText = () => {
+  var type = keysText.normal;
+  if (keysTextType === 'normal') {
+    type = keysText.gama;
+    keysTextType = 'gama';
+    switchButton.classList.add('active');
+  } else {
+    keysTextType = 'normal';
+    switchButton.classList.remove('active');
+  }
+  keys.forEach((key, index) => {
+    key.querySelector('kbd').innerText = type[index];
+  });
+  
+};
 
 playSong = () => {
   let counter = 0;
   const playIt = setInterval(() => {
     playButtonText.classList.add('active-record');
     recordedSounds.forEach(e => {
-      if (e.time == counter) {
+      if (e.time === counter) {
         e.audioFile.currentTime = 0;
         e.audioFile.play();
       }
