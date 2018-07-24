@@ -49,7 +49,6 @@ playSong = () => {
     if ((counter > lastTime+1000) || (counter > 60000)) {
       clearInterval(playIt);
       playButtonText.classList.remove('active-record');
-  
     }
   }, minInterval);
   playIt;

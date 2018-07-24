@@ -29,6 +29,11 @@ body {
   flex-direction: column;
 }
 
+.logo {
+  width: 480px;
+  z-index: 1000;
+}
+
 .piano {
   position: relative;
   width: auto;
@@ -105,7 +110,7 @@ body {
 }
 
 .switch-panel {
-  z-index: 100000;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
