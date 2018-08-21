@@ -1,6 +1,6 @@
 # piano-JS
-Vanilla JS and css piano
-
+Vanilla JS and css piano \
+[live view](https://jpwalkiewicz.github.io/piano-JS/)
 
 
 ### Sources
